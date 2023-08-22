@@ -40,23 +40,23 @@ public class ItemCommand {
         @NotNull
         private final ItemStatus itemStatus;
 
-        private final boolean brandNew;
+        private final Boolean brandNew;
 
-        private final boolean recommended;
+        private final Boolean recommended;
 
-        private final boolean onsiteOrder;
+        private final Boolean onsiteOrder;
 
-        private final boolean pickupOrder;
+        private final Boolean pickupOrder;
 
         @Size(max = 10)
-        private final List<FileDetail> productImages;
+        private final List<FileDetail> itemImages;
 
-        private final List<UUID> productOptionGroupIds;
+        private final List<UUID> optionGroupIds;
 
         @Builder
         public RegisterItemCommand(UUID itemCategoryId, String name, String description, int price, int onsitePrice, ItemStatus itemStatus,
                                    boolean brandNew, boolean recommended, boolean onsiteOrder, boolean pickupOrder,
-                                   List<FileDetail> productImages, List<UUID> productOptionGroupIds) {
+                                   List<FileDetail> itemImages, List<UUID> optionGroupIds) {
 
             validateCheckPickupOrderAndOnsiteOrder(onsiteOrder, pickupOrder);
             this.itemCategoryId = itemCategoryId;
@@ -69,8 +69,8 @@ public class ItemCommand {
             this.recommended = recommended;
             this.onsiteOrder = onsiteOrder;
             this.pickupOrder = pickupOrder;
-            this.productImages = productImages;
-            this.productOptionGroupIds = productOptionGroupIds;
+            this.itemImages = itemImages;
+            this.optionGroupIds = optionGroupIds;
             validateSelf();
         }
     }
