@@ -1,6 +1,6 @@
 package com.tmax.commerce.itemmodule.repository;
 
-import com.tmax.commerce.itemmodule.entity.Category;
+import com.tmax.commerce.itemmodule.entity.category.Category;
 
 import java.util.UUID;
 

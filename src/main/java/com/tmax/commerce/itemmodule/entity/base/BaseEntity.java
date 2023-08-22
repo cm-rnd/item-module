@@ -1,4 +1,4 @@
-package com.tmax.commerce.itemmodule.entity;
+package com.tmax.commerce.itemmodule.entity.base;
 
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;

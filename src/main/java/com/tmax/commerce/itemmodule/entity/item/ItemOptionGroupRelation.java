@@ -1,5 +1,7 @@
-package com.tmax.commerce.itemmodule.entity;
+package com.tmax.commerce.itemmodule.entity.item;
 
+import com.tmax.commerce.itemmodule.entity.base.BaseEntity;
+import com.tmax.commerce.itemmodule.entity.option.OptionGroup;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.tmax.commerce.itemmodule.entity;
+package com.tmax.commerce.itemmodule.entity.base;
 
 import com.tmax.commerce.itemmodule.common.DateUtil;
 import jakarta.persistence.Column;

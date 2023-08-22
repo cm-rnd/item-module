@@ -1,4 +1,4 @@
-package com.tmax.commerce.itemmodule.entity;
+package com.tmax.commerce.itemmodule.entity.category;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

@@ -1,4 +1,4 @@
-package com.tmax.commerce.itemmodule.entity;
+package com.tmax.commerce.itemmodule.entity.item;
 
 public enum ItemStatus {
     TODAY_SOLD_OUT("오늘 품절"),
