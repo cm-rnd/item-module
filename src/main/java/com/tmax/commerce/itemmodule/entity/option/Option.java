@@ -11,8 +11,9 @@ import java.util.UUID;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity(name = "`option`")
-public class Option extends BaseEntity {
+public class Option extends PersistableDateTimeEntity {
     @Id
+    @Column(columnDefinition = "BINARY(16)")
     private UUID id;
 
     private Long originId;
@@ -29,6 +30,6 @@ public class Option extends BaseEntity {
 
     private Long versionNumber;
 
-    //TODO: Status 추가
-    //TODO: Type 추가
+    @Enumerated(EnumType.STRING)
+    private ItemStatus itemStatus;
 }
