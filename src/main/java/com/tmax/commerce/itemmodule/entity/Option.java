@@ -12,7 +12,6 @@ import java.util.UUID;
 @Entity(name = "`option`")
 public class Option extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     private Long originId;

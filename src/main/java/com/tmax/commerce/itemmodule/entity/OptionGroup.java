@@ -12,7 +12,6 @@ import java.util.UUID;
 @Entity
 public class OptionGroup extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     private int min;
