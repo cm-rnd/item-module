@@ -7,7 +7,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Getter
 @Entity
@@ -17,13 +16,12 @@ import java.util.stream.Collectors;
 @Inheritance(strategy = InheritanceType.JOINED)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @NoArgsConstructor
-@Table(name = "Item")
+@Table(name = "item")
 public abstract class Item extends PersistableDateTimeEntity {
 
     @Id
     @EqualsAndHashCode.Include
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "Item_id", columnDefinition = "BINARY(16)")
+    @Column(name = "item_id", columnDefinition = "BINARY(16)")
     private UUID id;
 
     private String name;
@@ -42,7 +40,7 @@ public abstract class Item extends PersistableDateTimeEntity {
     private int sequence;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Item_group_id")
+    @JoinColumn(name = "item_group_id")
     private ItemGroup ItemGroup;
 
     private int price;
