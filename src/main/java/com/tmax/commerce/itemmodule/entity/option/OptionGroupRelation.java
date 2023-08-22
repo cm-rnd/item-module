@@ -1,5 +1,7 @@
-package com.tmax.commerce.itemmodule.entity;
+package com.tmax.commerce.itemmodule.entity.option;
 
+import com.tmax.commerce.itemmodule.entity.base.PersistableDateTimeEntity;
+import com.tmax.commerce.itemmodule.entity.item.ItemGroup;
 import jakarta.persistence.*;
 import lombok.*;
 

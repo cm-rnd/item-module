@@ -1,4 +1,4 @@
-package com.tmax.commerce.itemmodule.entity;
+package com.tmax.commerce.itemmodule.entity.item;
 
 
 import lombok.RequiredArgsConstructor;
