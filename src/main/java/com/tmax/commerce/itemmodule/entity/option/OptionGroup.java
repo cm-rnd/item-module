@@ -1,6 +1,6 @@
 package com.tmax.commerce.itemmodule.entity.option;
 
-import com.tmax.commerce.itemmodule.entity.base.BaseEntity;
+import com.tmax.commerce.itemmodule.entity.base.DateTimeEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -11,7 +11,8 @@ import java.util.UUID;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-public class OptionGroup extends PersistableDateTimeEntity {
+public class OptionGroup extends DateTimeEntity {
+
     @Id
     @Column(columnDefinition = "BINARY(16)")
     private UUID id;
@@ -22,6 +23,5 @@ public class OptionGroup extends PersistableDateTimeEntity {
 
     private String name;
 
-    @Column
-    private Boolean required = false;
+    private Boolean required = true;
 }
