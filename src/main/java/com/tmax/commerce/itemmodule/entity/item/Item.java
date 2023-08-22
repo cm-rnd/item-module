@@ -1,7 +1,7 @@
 package com.tmax.commerce.itemmodule.entity.item;
 
+import com.tmax.commerce.itemmodule.entity.base.DateTimeEntity;
 import com.tmax.commerce.itemmodule.entity.category.Category;
-import com.tmax.commerce.itemmodule.entity.base.PersistableDateTimeEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,7 +18,7 @@ import java.util.UUID;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @NoArgsConstructor
 @Table(name = "item")
-public abstract class Item extends PersistableDateTimeEntity {
+public abstract class Item extends DateTimeEntity {
 
     @Id
     @EqualsAndHashCode.Include
@@ -28,6 +28,8 @@ public abstract class Item extends PersistableDateTimeEntity {
     private String name;
 
     private String description;
+
+    private String itemCode;
 
     @ElementCollection(fetch = FetchType.LAZY)
     private List<File> itemImages = new ArrayList<>();
@@ -116,7 +118,6 @@ public abstract class Item extends PersistableDateTimeEntity {
         this.price = price;
         updateVersion();
     }
-
 
     protected void updateVersion() {
         version++;
