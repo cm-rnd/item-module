@@ -1,6 +1,7 @@
 package com.tmax.commerce.itemmodule.entity.option;
 
-import com.tmax.commerce.itemmodule.entity.base.BaseEntity;
+import com.tmax.commerce.itemmodule.entity.base.PersistableDateTimeEntity;
+import com.tmax.commerce.itemmodule.entity.item.ItemStatus;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
