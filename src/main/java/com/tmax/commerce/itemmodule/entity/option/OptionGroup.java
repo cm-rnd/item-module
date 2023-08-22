@@ -11,8 +11,9 @@ import java.util.UUID;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-public class OptionGroup extends BaseEntity {
+public class OptionGroup extends PersistableDateTimeEntity {
     @Id
+    @Column(columnDefinition = "BINARY(16)")
     private UUID id;
 
     private int min;
