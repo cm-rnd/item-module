@@ -10,7 +10,6 @@ import java.util.UUID;
 
 @Getter
 @Entity
-@ToString
 @AllArgsConstructor
 @DiscriminatorColumn(name = "type")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -29,7 +28,7 @@ public abstract class Item extends PersistableDateTimeEntity {
     private String description;
 
     @ElementCollection(fetch = FetchType.LAZY)
-    private List<File> ItemImages = new ArrayList<>();
+    private List<File> itemImages = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     private SuperStoreStatus connectedSuperStore;
@@ -41,12 +40,12 @@ public abstract class Item extends PersistableDateTimeEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_group_id")
-    private ItemGroup ItemGroup;
+    private ItemGroup itemGroup;
 
     private int price;
 
     @Enumerated(EnumType.STRING)
-    private ItemStatus ItemStatus;
+    private ItemStatus itemStatus;
 
     private boolean brandNew;
 
@@ -60,10 +59,10 @@ public abstract class Item extends PersistableDateTimeEntity {
         this.name = name;
         this.price = price;
         this.brandNew = brandNew;
-        this.ItemStatus = ItemStatus;
+        this.itemStatus = ItemStatus;
         this.recommended = recommended;
         this.description = description;
-        this.ItemImages = ItemImages;
+        this.itemImages = ItemImages;
         this.connectedSuperStore = connectedSuperStore;
         this.sequence = sequence;
         this.type = orderType;
@@ -73,24 +72,24 @@ public abstract class Item extends PersistableDateTimeEntity {
         boolean result = false;
         switch (i) {
             case 0:
-                result = ItemGroup.getAvailabilityByType(OrderType.PICKUP);
+                result = itemGroup.getAvailabilityByType(OrderType.PICKUP);
                 break;
             case 1:
-                result = ItemGroup.getAvailabilityByType(OrderType.ONSITE);
+                result = itemGroup.getAvailabilityByType(OrderType.ONSITE);
                 break;
             case 2:
-                result = ItemGroup.getAvailabilityByType(OrderType.RESERVATION);
+                result = itemGroup.getAvailabilityByType(OrderType.RESERVATION);
                 break;
         }
         return result;
     }
 
     public void setItemGroup(ItemGroup ItemGroup) {
-        this.ItemGroup = ItemGroup;
+        this.itemGroup = ItemGroup;
     }
 
     public Category getItemCategory() {
-        return ItemGroup.getItemCategory();
+        return itemGroup.getItemCategory();
     }
 
     public Object getOrderType() {
@@ -98,14 +97,14 @@ public abstract class Item extends PersistableDateTimeEntity {
     }
 
     public List<File> getImages() {
-        return ItemImages;
+        return itemImages;
     }
 
 
     public void changeItemStatus(ItemStatus ItemStatus) {
-        if (this.ItemStatus.equals(ItemStatus))
+        if (this.itemStatus.equals(ItemStatus))
             return;
-        this.ItemStatus = ItemStatus;
+        this.itemStatus = ItemStatus;
         updateVersion();
     }
 
@@ -134,7 +133,7 @@ public abstract class Item extends PersistableDateTimeEntity {
     }
 
     public void changeItemImages(List<File> files) {
-        this.ItemImages = files;
+        this.itemImages = files;
         updateVersion();
     }
 

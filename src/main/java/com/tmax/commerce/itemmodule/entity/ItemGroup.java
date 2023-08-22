@@ -51,7 +51,7 @@ public class ItemGroup extends PersistableDateTimeEntity {
     }
 
 
-    public Item getitemByOrderType(OrderType orderType) {
+    public Item getItemByOrderType(OrderType orderType) {
         return items.stream().filter(item -> item.getOrderType() == orderType).findFirst().orElse(null);
     }
 
@@ -102,7 +102,6 @@ public class ItemGroup extends PersistableDateTimeEntity {
     }
 
     public void changeSequence(int sequence) {
-        //this.sequence = sequence;
         items.forEach(item -> item.changeSequence(sequence));
     }
 
@@ -114,7 +113,7 @@ public class ItemGroup extends PersistableDateTimeEntity {
         items.forEach(item -> item.changeRecommended(recommended));
     }
 
-    public void changeitemImages(List<File> files) {
+    public void changeItemImages(List<File> files) {
         items.forEach(item -> item.changeItemImages(files));
         updateVersion();
     }
@@ -139,14 +138,14 @@ public class ItemGroup extends PersistableDateTimeEntity {
         updateVersion();
     }
 
-    public void changeitemStatus(ItemStatus itemStatus) {
+    public void changeItemStatus(ItemStatus itemStatus) {
         for (Item item : items) {
             item.changeItemStatus(itemStatus);
         }
         updateVersion();
     }
 
-    public void changeitemStatusByOrderType(OrderType orderType, ItemStatus itemStatus) {
+    public void changeItemStatusByOrderType(OrderType orderType, ItemStatus itemStatus) {
         for (Item item : items) {
             if (item.getOrderType() == orderType)
                 item.changeItemStatus(itemStatus);
@@ -155,11 +154,11 @@ public class ItemGroup extends PersistableDateTimeEntity {
     }
 
 
-    public void additemOptionGroupRelation(OptionGroupRelation optionGroupRelation) {
+    public void addItemOptionGroupRelation(OptionGroupRelation optionGroupRelation) {
         this.itemOptionGroupRelations.add(optionGroupRelation);
     }
 
-    public void removeitemOptionGroupRelation(OptionGroupRelation optionGroupRelation) {
+    public void removeItemOptionGroupRelation(OptionGroupRelation optionGroupRelation) {
         this.itemOptionGroupRelations.remove(optionGroupRelation);
         updateVersion();
     }
