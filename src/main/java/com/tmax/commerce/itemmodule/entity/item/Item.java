@@ -22,7 +22,7 @@ public abstract class Item extends DateTimeEntity {
 
     @Id
     @EqualsAndHashCode.Include
-    @Column(name = "item_id", columnDefinition = "BINARY(16)")
+    @Column(columnDefinition = "BINARY(16)")
     private UUID id;
 
     private String name;
