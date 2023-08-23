@@ -11,7 +11,7 @@ import java.util.UUID;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Entity(name = "option")
+@Entity(name = "`option`")
 public class Option extends DateTimeEntity {
     @Id
     @Column(columnDefinition = "BINARY(16)")
