@@ -3,6 +3,7 @@ package com.tmax.commerce.itemmodule.entity.option;
 import com.tmax.commerce.itemmodule.entity.base.DateTimeEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -14,8 +15,12 @@ import java.util.UUID;
 public class OptionGroup extends DateTimeEntity {
 
     @Id
+    @EqualsAndHashCode.Include
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @Column(columnDefinition = "BINARY(16)")
-    private UUID id;
+    private UUID uuid;
 
     private UUID shopId;
 

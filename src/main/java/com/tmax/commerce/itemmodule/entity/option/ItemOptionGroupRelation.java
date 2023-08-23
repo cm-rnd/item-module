@@ -5,6 +5,8 @@ import com.tmax.commerce.itemmodule.entity.item.ItemGroup;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.UUID;
+
 
 @Getter
 @Entity
@@ -16,8 +18,12 @@ import lombok.*;
 public class ItemOptionGroupRelation extends DateTimeEntity {
 
     @Id
+    @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @Column(columnDefinition = "BINARY(16)")
+    private UUID uuid;
 
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
