@@ -1,6 +1,6 @@
 package com.tmax.commerce.itemmodule.entity.option;
 
-import com.tmax.commerce.itemmodule.entity.base.BaseEntity;
+import com.tmax.commerce.itemmodule.entity.base.DateTimeEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -11,7 +11,7 @@ import java.util.UUID;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-public class OptionGroup extends BaseEntity {
+public class OptionGroup extends DateTimeEntity {
     @Id
     private UUID id;
 
