@@ -17,6 +17,8 @@ public class OptionGroup extends DateTimeEntity {
     @Column(columnDefinition = "BINARY(16)")
     private UUID id;
 
+    private UUID shopId;
+
     private int min;
 
     private int max;
@@ -24,4 +26,6 @@ public class OptionGroup extends DateTimeEntity {
     private String name;
 
     private Boolean required = true;
+
+    private Long version;
 }
