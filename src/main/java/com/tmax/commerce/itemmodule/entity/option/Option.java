@@ -4,6 +4,7 @@ import com.tmax.commerce.itemmodule.entity.base.DateTimeEntity;
 import com.tmax.commerce.itemmodule.entity.item.ItemStatus;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -13,9 +14,14 @@ import java.util.UUID;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity(name = "`option`")
 public class Option extends DateTimeEntity {
+
     @Id
+    @EqualsAndHashCode.Include
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @Column(columnDefinition = "BINARY(16)")
-    private UUID id;
+    private UUID uuid;
 
     private String itemCode; // nullable가능함
 
