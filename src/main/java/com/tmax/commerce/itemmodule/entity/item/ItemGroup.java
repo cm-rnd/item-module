@@ -23,9 +23,8 @@ import java.util.UUID;
 public class ItemGroup extends DateTimeEntity {
 
     @Id
-    @Builder.Default
     @EqualsAndHashCode.Include
-    @Column(name = "item_group_id", columnDefinition = "BINARY(16)")
+    @Column(columnDefinition = "BINARY(16)")
     private UUID id;
 
     @ToString.Exclude
