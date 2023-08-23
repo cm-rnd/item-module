@@ -1,8 +1,8 @@
 package com.tmax.commerce.itemmodule.entity.item;
 
+import com.tmax.commerce.itemmodule.entity.base.DateTimeEntity;
 import com.tmax.commerce.itemmodule.entity.category.Category;
-import com.tmax.commerce.itemmodule.entity.option.OptionGroupRelation;
-import com.tmax.commerce.itemmodule.entity.base.PersistableDateTimeEntity;
+import com.tmax.commerce.itemmodule.entity.option.ItemOptionGroupRelation;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,20 +14,21 @@ import java.util.UUID;
 @Entity
 @Table(name = "item_group",
         uniqueConstraints = {
-                @UniqueConstraint(name = "ITEM_NAME_UNIQUE", columnNames = {"item_category_id", "name"})
+                @UniqueConstraint(name = "ITEM_NAME_UNIQUE", columnNames = {"category_id", "name"})
         })
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-@Builder
 @Getter
-public class ItemGroup extends PersistableDateTimeEntity {
+public class ItemGroup extends DateTimeEntity {
 
     @Id
-    @Builder.Default
     @EqualsAndHashCode.Include
-    @Column(name = "item_group_id", columnDefinition = "BINARY(16)")
-    private UUID id = UUID.randomUUID();
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(columnDefinition = "BINARY(16)")
+    private UUID uuid;
 
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
@@ -41,18 +42,13 @@ public class ItemGroup extends PersistableDateTimeEntity {
 
     @Builder.Default
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "itemGroup", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-    private List<OptionGroupRelation> itemOptionGroupRelations = new ArrayList<>();
+    private List<ItemOptionGroupRelation> itemOptionGroupRelations = new ArrayList<>();
 
     @Builder.Default
     @OneToMany(mappedBy = "itemGroup", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Item> items = new ArrayList<>();
 
     private long version;
-
-    public long getVersion() {
-        return version;
-    }
-
 
     public Item getItemByOrderType(OrderType orderType) {
         return items.stream().filter(item -> item.getOrderType() == orderType).findFirst().orElse(null);
@@ -62,9 +58,7 @@ public class ItemGroup extends PersistableDateTimeEntity {
         return category;
     }
 
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
 
     public long getPriceByType(OrderType orderType) {
         for (Item item : items) {
@@ -87,12 +81,6 @@ public class ItemGroup extends PersistableDateTimeEntity {
     public boolean isLatest(long version) {
         return this.version == version;
     }
-
-    @Override
-    public UUID getId() {
-        return id;
-    }
-
 
     public void changeName(String name) {
         if (this.name.equals(name))
@@ -157,26 +145,25 @@ public class ItemGroup extends PersistableDateTimeEntity {
     }
 
 
-    public void addItemOptionGroupRelation(OptionGroupRelation optionGroupRelation) {
-        this.itemOptionGroupRelations.add(optionGroupRelation);
+    public void addItemOptionGroupRelation(ItemOptionGroupRelation itemoptionGroupRelation) {
+        this.itemOptionGroupRelations.add(itemoptionGroupRelation);
     }
 
-    public void removeItemOptionGroupRelation(OptionGroupRelation optionGroupRelation) {
-        this.itemOptionGroupRelations.remove(optionGroupRelation);
+    public void removeItemOptionGroupRelation(ItemOptionGroupRelation itemoptionGroupRelation) {
+        this.itemOptionGroupRelations.remove(itemoptionGroupRelation);
         updateVersion();
     }
 
 
     protected void updateVersion() {
         version++;
-        items.forEach(item -> item.updateVersion());
+        items.forEach(Item::updateVersion);
     }
 
     public void wasInitialized() {
         this.version = 0;
-        items.forEach(item -> item.wasInitialized());
+        items.forEach(Item::wasInitialized);
     }
-
 
     @Builder
     public ItemGroup(Category category, String name) {
@@ -189,7 +176,6 @@ public class ItemGroup extends PersistableDateTimeEntity {
         this.items.add(item);
         item.setItemGroup(this);
     }
-
 
     public void changeConnectedSuperStore(Item.SuperStoreStatus connectedSuperStore) {
         items.forEach(item -> item.changeConnectedSuperStore(connectedSuperStore));
