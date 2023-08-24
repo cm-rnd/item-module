@@ -1,10 +1,12 @@
 package com.tmax.commerce.itemmodule.entity.category;
 
+import jakarta.persistence.*;
 import com.tmax.commerce.itemmodule.common.utils.enums.CategoryColor;
 import com.tmax.commerce.itemmodule.entity.base.DateTimeEntity;
 import com.tmax.commerce.itemmodule.entity.item.ItemGroup;
-import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.UUID;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,12 +17,16 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @NoArgsConstructor
+@Table(name = "category")
 @Builder
-@Table(name = "Category")
 public class Category extends DateTimeEntity {
     @Id
-    @Column(name = "id", nullable = false)
+    @EqualsAndHashCode.Include
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(columnDefinition = "BINARY(16)")
+    private UUID uuid;
 
     @Column(nullable = false)
     private String name;
@@ -59,8 +65,8 @@ public class Category extends DateTimeEntity {
         return removed;
     }
 
-    public void updateName(String name){
-        if(name != null){
+    public void updateName(String name) {
+        if (name != null) {
             this.name = name;
         }
     }
