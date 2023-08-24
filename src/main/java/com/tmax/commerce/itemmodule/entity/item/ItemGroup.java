@@ -14,7 +14,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "item_group",
         uniqueConstraints = {
-                @UniqueConstraint(name = "ITEM_NAME_UNIQUE", columnNames = {"item_category_id", "name"})
+                @UniqueConstraint(name = "ITEM_NAME_UNIQUE", columnNames = {"category_id", "name"})
         })
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
