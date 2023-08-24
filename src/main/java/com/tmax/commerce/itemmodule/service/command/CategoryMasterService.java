@@ -71,22 +71,22 @@ public class CategoryMasterService {
                 .build();
     }
 
-    @Transactional
-    public PostCategoryResponseDto postCategory(PostCategoryRequestDto dto){
-        String newCategoryName = getNewCategoryName();
-        int randomId = getCategoryRandomId();
-        Category parentCategory = findCategoryById(dto.getParentCategoryId());
-        Category newCategory = Category.builder()
-                .id(Long.valueOf(randomId))
-                .parentCategory(parentCategory)
-                .name(newCategoryName)
-                .build();
-        Category savedCategory = categoryRepository.save(newCategory);
-        return PostCategoryResponseDto.builder()
-                .id(savedCategory.getId())
-                .name(savedCategory.getName())
-                .build();
-    }
+//    @Transactional
+//    public PostCategoryResponseDto postCategory(PostCategoryRequestDto dto){
+//        String newCategoryName = getNewCategoryName();
+//        int randomId = getCategoryRandomId();
+//        Category parentCategory = findCategoryById(dto.getParentCategoryId());
+//        Category newCategory = Category.builder()
+//                .id(Long.valueOf(randomId))
+//                .parentCategory(parentCategory)
+//                .name(newCategoryName)
+//                .build();
+//        Category savedCategory = categoryRepository.save(newCategory);
+//        return PostCategoryResponseDto.builder()
+//                .id(savedCategory.getId())
+//                .name(savedCategory.getName())
+//                .build();
+//    }
 
     // 시연을 위해 임시로 구현된 ID
     // 추후 sequence 디폴트값 수정 후 삭제 예정
@@ -115,44 +115,47 @@ public class CategoryMasterService {
         return willUsedNumber == 1 ? NEW_CATEGORY_NAME : NEW_CATEGORY_NAME + willUsedNumber;
     }
 
-    @Transactional
-    public UpdateCategoryResponseDto updateCategory(UpdateCategoryRequestDto dto) {
-        Category updatedCategory = findCategoryById(dto.getCategoryId());
-        validateCategoryNameDuplicate(dto.getName());
-        updatedCategory.updateName(dto.getName());
-        return UpdateCategoryResponseDto.builder()
-                .categoryId(updatedCategory.getId())
-                .build();
-    }
+//    @Transactional
+//    public UpdateCategoryResponseDto updateCategory(UpdateCategoryRequestDto dto) {
+//        Category updatedCategory = findCategoryById(dto.getCategoryId());
+//        validateCategoryNameDuplicate(dto.getName());
+//        updatedCategory.updateName(dto.getName());
+//        return UpdateCategoryResponseDto.builder()
+//                .categoryId(updatedCategory.getId())
+//                .build();
+//    }
 
-    private void validateCategoryNameDuplicate(String name) {
-        if(categoryRepository.existsByName(name)){
-            throw new AlreadyExistsCategoryNameException();
-        }
-    }
+    //TODO: AlreadyExistsCategoryNameException 정의 필요
+//    private void validateCategoryNameDuplicate(String name) {
+//        if(categoryRepository.existsByName(name)){
+//            throw new AlreadyExistsCategoryNameException();
+//        }
+//    }
 
-    @Transactional
-    public void deleteCategory(Long categoryId) {
-        validateOneDepthCategory(categoryId);
-        List<Long> deletedCategoryIds = findDeletedCategoryIds(findCategoryById(categoryId));
-        deletedCategoryIds.add(categoryId);
-        // 삭제될 카테고리를 갖는 상품들의 카테고리를 모두 null로 update
-        updateProductsCategory(deletedCategoryIds);
+//    @Transactional
+//    public void deleteCategory(Long categoryId) {
+//        validateOneDepthCategory(categoryId);
+//        List<Long> deletedCategoryIds = findDeletedCategoryIds(findCategoryById(categoryId));
+//        deletedCategoryIds.add(categoryId);
+//        // 삭제될 카테고리를 갖는 상품들의 카테고리를 모두 null로 update
+//        updateProductsCategory(deletedCategoryIds);
+//
+//        // 모든 카테고리를 삭제(정합성 고려하여 순서대로 insert 되어있음)
+//        categoryRepository.deleteAllByIdInBatch(deletedCategoryIds);
+//    }
 
-        // 모든 카테고리를 삭제(정합성 고려하여 순서대로 insert 되어있음)
-        categoryRepository.deleteAllByIdInBatch(deletedCategoryIds);
-    }
+    //TODO: CannotDeleteOneDepthCategoryException 정의 필요
+//    private void validateOneDepthCategory(Long categoryId) {
+//        Category category = findCategoryById(categoryId);
+//        if(category.getParentCategory() == null){
+//            throw new CannotDeleteOneDepthCategoryException();
+//        }
+//    }
 
-    private void validateOneDepthCategory(Long categoryId) {
-        Category category = findCategoryById(categoryId);
-        if(category.getParentCategory() == null){
-            throw new CannotDeleteOneDepthCategoryException();
-        }
-    }
-
-    private void updateProductsCategory(List<Long> deletedCategoryIds) {
-        productRepository.updateProductsCategoryToNull(deletedCategoryIds);
-    }
+    //TODO: productRepo updateProductsCategoryToNull 추가 필요
+//    private void updateProductsCategory(List<Long> deletedCategoryIds) {
+//        productRepository.updateProductsCategoryToNull(deletedCategoryIds);
+//    }
 
     private List<Long> findDeletedCategoryIds(Category category){
         List<Long> deletedCategoryIds = new ArrayList<>();
@@ -163,75 +166,80 @@ public class CategoryMasterService {
         return deletedCategoryIds;
     }
 
-    private Category findCategoryById(Long id){
-        return id != null ? categoryRepository.findById(id).orElseThrow(CategoryNotFoundException::new) : null;
-    }
+    //TODO: CategoryNotFoundException 정의 필요
+//    private Category findCategoryById(Long id){
+//        return id != null ? categoryRepository.findById(id).orElseThrow(CategoryNotFoundException::new) : null;
+//    }
 
     private List<Category> findAllCategories() {
         return categoryRepository.findAll();
     }
+    //TODO: productRepo updateProductsCategory 추가 필요
+//    @Transactional
+//    public void connectProductsWithCategory(
+//            ConnectProductsWithCategoryRequestDto dto
+//    ) {
+//        productRepository.updateProductsCategory(dto.getCategoryId(), dto.getProductsIds());
+//    }
 
-    @Transactional
-    public void connectProductsWithCategory(
-            ConnectProductsWithCategoryRequestDto dto
-    ) {
-        productRepository.updateProductsCategory(dto.getCategoryId(), dto.getProductsIds());
-    }
+    //TODO: productRepo findTotalProductsCountByCategoryId 추가 필요
+//    @Transactional(readOnly = true)
+//    public GetProductsCountOfCategoryResponseDto getProductsCountOfCategory(Long categoryId
+//    ){
+//        return GetProductsCountOfCategoryResponseDto.builder()
+//                .count(productRepository.findTotalProductsCountByCategoryId(getTotalSubCategoryIds(categoryId)))
+//                .build();
+//    }
 
-    @Transactional(readOnly = true)
-    public GetProductsCountOfCategoryResponseDto getProductsCountOfCategory(Long categoryId
-    ){
-        return GetProductsCountOfCategoryResponseDto.builder()
-                .count(productRepository.findTotalProductsCountByCategoryId(getTotalSubCategoryIds(categoryId)))
-                .build();
-    }
+//    public List<Long> getTotalSubCategoryIds(Long categoryId) {
+//        List<Long> totalCategoryIds = new ArrayList<>();
+//        Category category = findCategoryById(categoryId);
+//        if(category == null) return null;
+//        List<Category> subCategories = category.getSubCategories();
+//        for (Category subCategory : subCategories) {
+//            totalCategoryIds.addAll(getTotalSubCategoryIds(subCategory.getId()));
+//        }
+//        totalCategoryIds.add(categoryId);
+//        return totalCategoryIds;
+//    }
 
-    public List<Long> getTotalSubCategoryIds(Long categoryId) {
-        List<Long> totalCategoryIds = new ArrayList<>();
-        Category category = findCategoryById(categoryId);
-        if(category == null) return null;
-        List<Category> subCategories = category.getSubCategories();
-        for (Category subCategory : subCategories) {
-            totalCategoryIds.addAll(getTotalSubCategoryIds(subCategory.getId()));
-        }
-        totalCategoryIds.add(categoryId);
-        return totalCategoryIds;
-    }
+    //TODO: productRepo findAllOrderByCreatedAtDesc 추가 필요
+//    @Transactional(readOnly = true)
+//    public GetConnectionProductsCandidResponseDto getConnectionProductsCandid(Boolean categoryNull, String searchWord) {
+//        List<Product> findProducts = productRepository.findAllOrderByCreatedAtDesc(categoryNull, searchWord);
+//        return GetConnectionProductsCandidResponseDto.builder()
+//                .products(getConnectionProductsCandidProducts(findProducts))
+//                .build();
+//    }
 
-    @Transactional(readOnly = true)
-    public GetConnectionProductsCandidResponseDto getConnectionProductsCandid(Boolean categoryNull, String searchWord) {
-        List<Product> findProducts = productRepository.findAllOrderByCreatedAtDesc(categoryNull, searchWord);
-        return GetConnectionProductsCandidResponseDto.builder()
-                .products(getConnectionProductsCandidProducts(findProducts))
-                .build();
-    }
+    //TODO: Item entity의 컬럼 추가 필요
+//    @Transactional(readOnly = true)
+//    public List<GetConnectionProductsCandidResponseDto.Product> getConnectionProductsCandidProducts(
+//            List<Product> products
+//    ) {
+//        return products.stream()
+//                .map(product -> GetConnectionProductsCandidResponseDto.Product
+//                        .builder()
+//                        .id(product.getId())
+//                        .categoryName(product.getCategory() != null ? product.getCategory().getName() : "")
+//                        .sellerName("티맥스스토어") // 성능 이슈로 임시적으로 static value 대입
+//                        .sellingPrice(product.getSellingPrice())
+//                        .sellingStatus(convertToProductSellingStatus(product))
+//                        .name(product.getName())
+//                        .build())
+//                .collect(Collectors.toList());
+//    }
 
-    @Transactional(readOnly = true)
-    public List<GetConnectionProductsCandidResponseDto.Product> getConnectionProductsCandidProducts(
-            List<Product> products
-    ) {
-        return products.stream()
-                .map(product -> GetConnectionProductsCandidResponseDto.Product
-                        .builder()
-                        .id(product.getId())
-                        .categoryName(product.getCategory() != null ? product.getCategory().getName() : "")
-                        .sellerName("티맥스스토어") // 성능 이슈로 임시적으로 static value 대입
-                        .sellingPrice(product.getSellingPrice())
-                        .sellingStatus(convertToProductSellingStatus(product))
-                        .name(product.getName())
-                        .build())
-                .collect(Collectors.toList());
-    }
-
-    private String convertToProductSellingStatus(Product product) {
-        if(product.getProductStatusType() == null)
-            return "";
-        switch (product.getProductStatusType()){
-            case STOP:
-                return "판매중지";
-            case SALE:
-            default:
-                return "판매중";
-        }
-    }
+    //TODO: item getProductStatusType 추가 필요
+//    private String convertToProductSellingStatus(Product product) {
+//        if(product.getProductStatusType() == null)
+//            return "";
+//        switch (product.getProductStatusType()){
+//            case STOP:
+//                return "판매중지";
+//            case SALE:
+//            default:
+//                return "판매중";
+//        }
+//    }
 }

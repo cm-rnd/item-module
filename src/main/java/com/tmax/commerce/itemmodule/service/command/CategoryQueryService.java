@@ -7,7 +7,6 @@ import com.tmax.commerce.itemmodule.service.dto.mapper.CategoryMapper;
 import com.tmax.commerce.itemmodule.service.dto.category.user.GetAllCategoriesResponseDto;
 import com.tmax.commerce.itemmodule.service.dto.category.user.GetAllOneDepthCategoriesResponseDto;
 import com.tmax.commerce.itemmodule.service.dto.category.user.GetCategoriesByDepthResponseDto;
-import com.tmax.commerce.itemmodule.category.exception.CategoryNotFoundException;
 import com.tmax.commerce.itemmodule.entity.category.Category;
 import com.tmax.commerce.itemmodule.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
@@ -62,12 +61,12 @@ public class CategoryQueryService {
                 .build();
     }
 
-    public OneDepthCategoryDto getOnedepthCategory(Long categoryId) {
-        Category category = categoryRepository.findById(categoryId).orElseThrow(CategoryNotFoundException::new);
-
-        return mappingOneDepthCategory(category);
-
-    }
+//    public OneDepthCategoryDto getOnedepthCategory(Long categoryId) {
+//        Category category = categoryRepository.findById(categoryId).orElseThrow(CategoryNotFoundException::new);
+//
+//        return mappingOneDepthCategory(category);
+//
+//    }
 
 
     public Integer getCategoryDepth(Category category) {

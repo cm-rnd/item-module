@@ -25,12 +25,12 @@ public class CategoryController {
         return categoryQueryService.getAllOneDepthCategories();
     }
 
-    @GetMapping("/{categoryId}")
-    public OneDepthCategoryDto getCategory(
-            @PathVariable(value = "categoryId") Long categoryId
-    ) {
-        return categoryQueryService.getOnedepthCategory(categoryId);
-    }
+//    @GetMapping("/{categoryId}")
+//    public OneDepthCategoryDto getCategory(
+//            @PathVariable(value = "categoryId") Long categoryId
+//    ) {
+//        return categoryQueryService.getOnedepthCategory(categoryId);
+//    }
 
     @GetMapping("/depth")
     public GetCategoriesByDepthResponseDto getAllCategoriesByDepth(
