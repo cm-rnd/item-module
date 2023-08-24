@@ -2,7 +2,7 @@ package com.tmax.commerce.itemmodule.entity.category;
 
 import com.tmax.commerce.itemmodule.common.utils.enums.CategoryColor;
 import com.tmax.commerce.itemmodule.entity.base.DateTimeEntity;
-import com.tmax.commerce.itemmodule.entity.item.Item;
+import com.tmax.commerce.itemmodule.entity.item.ItemGroup;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -36,11 +36,11 @@ public class Category extends DateTimeEntity {
     private List<Category> subCategories = new ArrayList<>();
 
     @OneToMany(mappedBy = "category")
-    private List<Item> items;
+    private List<ItemGroup> items;
 
-    @OneToMany(mappedBy = "category")
-    @Builder.Default
-    private List<ShoppingColor> shoppingColors = new ArrayList<>();
+//    @OneToMany(mappedBy = "category")
+//    @Builder.Default
+//    private List<ShoppingColor> shoppingColors = new ArrayList<>();
 
     public void addSubCategory(Category subCategory) {
         subCategories.add(subCategory);

@@ -17,9 +17,9 @@ public interface CategoryMapper {
     @Mapping(target = "colorCode", source = "category.categoryColor.colorCode")
     CategoriesByDepthDto toCategoryByDepthDto(Category category);
 
-    @Mapping(target = "parentCategory", ignore = true)
-    @Mapping(target = "products", ignore = true)
-    @Mapping(target = "categoryColor", ignore = true)
-    @Mapping(target = "shoppingColors", ignore = true)
-    Category toEntity(CategoryDto categoryDto);
+//    @Mapping(target = "parentCategory", ignore = true)
+//    @Mapping(target = "products", ignore = true)
+//    @Mapping(target = "categoryColor", ignore = true)
+//    @Mapping(target = "shoppingColors", ignore = true)
+//    Category toEntity(CategoryDto categoryDto);
 }
