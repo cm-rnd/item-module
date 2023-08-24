@@ -23,37 +23,37 @@ public class CategoryMasterController {
         return masterCategoryService.getAllCategoriesMaster();
     }
 
-    @PostMapping()
-    public PostCategoryResponseDto postCategory(@RequestBody PostCategoryRequestDto dto){
-        return masterCategoryService.postCategory(dto);
-    }
-
-    @PatchMapping()
-    public UpdateCategoryResponseDto updateCategory(@RequestBody UpdateCategoryRequestDto dto){
-        return masterCategoryService.updateCategory(dto);
-    }
-
-    @DeleteMapping("/{categoryId}")
-    public void deleteCategory(@PathVariable Long categoryId){
-        masterCategoryService.deleteCategory(categoryId);
-    }
-
-    @PatchMapping("/product/connection")
-    public void connectProductsWithCategory(
-            @RequestBody ConnectProductsWithCategoryRequestDto dto
-    ){
-        masterCategoryService.connectProductsWithCategory(dto);
-    }
-    @GetMapping("/product")
-    public GetConnectionProductsCandidResponseDto getConnectionProductsCandid(
-            @RequestParam("categoryNull") Boolean CategoryNull,
-            @RequestParam(value = "searchWord", required = false) String searchWord
-    ){
-        return masterCategoryService.getConnectionProductsCandid(CategoryNull, searchWord);
-    }
-    @GetMapping("/product/count/{categoryId}")
-    public GetProductsCountOfCategoryResponseDto getProductsCountOfCategory(@PathVariable Long categoryId){
-        return masterCategoryService.getProductsCountOfCategory(categoryId);
-    }
+//    @PostMapping()
+//    public PostCategoryResponseDto postCategory(@RequestBody PostCategoryRequestDto dto){
+//        return masterCategoryService.postCategory(dto);
+//    }
+//
+//    @PatchMapping()
+//    public UpdateCategoryResponseDto updateCategory(@RequestBody UpdateCategoryRequestDto dto){
+//        return masterCategoryService.updateCategory(dto);
+//    }
+//
+//    @DeleteMapping("/{categoryId}")
+//    public void deleteCategory(@PathVariable Long categoryId){
+//        masterCategoryService.deleteCategory(categoryId);
+//    }
+//
+//    @PatchMapping("/product/connection")
+//    public void connectProductsWithCategory(
+//            @RequestBody ConnectProductsWithCategoryRequestDto dto
+//    ){
+//        masterCategoryService.connectProductsWithCategory(dto);
+//    }
+//    @GetMapping("/product")
+//    public GetConnectionProductsCandidResponseDto getConnectionProductsCandid(
+//            @RequestParam("categoryNull") Boolean CategoryNull,
+//            @RequestParam(value = "searchWord", required = false) String searchWord
+//    ){
+//        return masterCategoryService.getConnectionProductsCandid(CategoryNull, searchWord);
+//    }
+//    @GetMapping("/product/count/{categoryId}")
+//    public GetProductsCountOfCategoryResponseDto getProductsCountOfCategory(@PathVariable Long categoryId){
+//        return masterCategoryService.getProductsCountOfCategory(categoryId);
+//    }
 
 }
