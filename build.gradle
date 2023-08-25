@@ -76,8 +76,3 @@ dependencyManagement {
         mavenBom "org.springframework.cloud:spring-cloud-dependencies:2021.0.3"
     }
 }
-
-
-tasks.named('test') {
-    useJUnitPlatform()
-}
