@@ -3,7 +3,7 @@ package com.tmax.commerce.itemmodule.entity.item;
 
 import com.tmax.commerce.itemmodule.entity.item.subtyped.OnsiteItem;
 import com.tmax.commerce.itemmodule.entity.item.subtyped.PickupItem;
-import com.tmax.commerce.itemmodule.service.command.ItemCommand;
+import com.tmax.commerce.itemmodule.service.command.shop.owner.ItemCommand;
 import lombok.RequiredArgsConstructor;
 
 import java.util.UUID;

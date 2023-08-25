@@ -1,5 +1,8 @@
 package com.tmax.commerce.itemmodule.service.command;
 
+import com.tmax.commerce.itemmodule.repository.item.ItemGroupRepository;
+import com.tmax.commerce.itemmodule.repository.option.OptionGroupRepository;
+import com.tmax.commerce.itemmodule.service.command.shop.owner.ItemCommand;
 import com.tmax.commerce.itemmodule.common.UuidGenerator;
 import com.tmax.commerce.itemmodule.common.exception.BusinessErrorCode;
 import com.tmax.commerce.itemmodule.common.exception.BusinessException;
@@ -7,8 +10,6 @@ import com.tmax.commerce.itemmodule.entity.item.ItemGroup;
 import com.tmax.commerce.itemmodule.entity.item.OrderType;
 import com.tmax.commerce.itemmodule.entity.option.ItemOptionGroupRelation;
 import com.tmax.commerce.itemmodule.repository.CategoryRepository;
-import com.tmax.commerce.itemmodule.repository.ItemGroupRepository;
-import com.tmax.commerce.itemmodule.repository.OptionGroupRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
