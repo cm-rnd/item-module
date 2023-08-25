@@ -1,4 +1,4 @@
-package com.tmax.commerce.itemmodule.service.command;
+package com.tmax.commerce.itemmodule.service.command.shop.owner;
 
 
 import com.tmax.commerce.itemmodule.common.exception.InputErrorCode;

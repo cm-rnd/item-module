@@ -18,7 +18,7 @@ import java.util.UUID;
         })
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 @Getter
 public class ItemGroup extends DateTimeEntity {
 
@@ -40,11 +40,9 @@ public class ItemGroup extends DateTimeEntity {
     @Column(name = "sequences")
     private int sequence;
 
-    @Builder.Default
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "itemGroup", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<ItemOptionGroupRelation> itemOptionGroupRelations = new ArrayList<>();
 
-    @Builder.Default
     @OneToMany(mappedBy = "itemGroup", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Item> items = new ArrayList<>();
 

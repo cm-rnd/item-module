@@ -10,9 +10,7 @@ import java.util.UUID;
 
 @Getter
 @Entity
-@ToString
 @AllArgsConstructor
-@Table(name = "item_option_group_relation")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ItemOptionGroupRelation extends DateTimeEntity {
@@ -25,7 +23,6 @@ public class ItemOptionGroupRelation extends DateTimeEntity {
     @Column(columnDefinition = "BINARY(16)")
     private UUID uuid;
 
-    @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_group_id")
     private ItemGroup itemGroup;
@@ -33,5 +30,12 @@ public class ItemOptionGroupRelation extends DateTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "option_group_id")
     private OptionGroup optionGroup;
+
+    @Builder
+    public ItemOptionGroupRelation(ItemGroup itemGroup, OptionGroup optionGroup){
+        this.uuid = UUID.randomUUID();
+        this.itemGroup = itemGroup;
+        this.optionGroup = optionGroup;
+    }
 
 }
