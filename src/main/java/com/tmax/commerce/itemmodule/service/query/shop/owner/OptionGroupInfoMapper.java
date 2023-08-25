@@ -18,6 +18,7 @@ public interface OptionGroupInfoMapper {
 
     @Mapping(target = "optionGroupId", source = "optionGroup.id")
     @Mapping(target = "options", source = "optionGroup.options")
+    @Mapping(target = "choiceCount", source = "optionGroup.max")
     OptionGroupInfo of(OptionGroup optionGroup, List<ItemGroup> items);
 
     @Mapping(target = "optionId", source = "option.id")
