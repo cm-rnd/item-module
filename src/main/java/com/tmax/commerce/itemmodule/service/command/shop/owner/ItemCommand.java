@@ -7,6 +7,7 @@ import com.tmax.commerce.itemmodule.common.exception.SelfValidating;
 import com.tmax.commerce.itemmodule.entity.file.FileDetail;
 import com.tmax.commerce.itemmodule.entity.item.Item;
 import com.tmax.commerce.itemmodule.entity.item.ItemStatus;
+import com.tmax.commerce.itemmodule.entity.item.OrderType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -14,6 +15,7 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -35,44 +37,54 @@ public class ItemCommand {
 
         private final int price;
 
-        private final int onsitePrice;
-
         @NotNull
         private final ItemStatus itemStatus;
 
-        private final boolean brandNew;
+        private final Boolean brandNew;
 
-        private final boolean recommended;
+        private final Boolean recommended;
 
-        private final boolean onsiteOrder;
-
-        private final boolean pickupOrder;
+        private final List<OrderType> orderTypes;
 
         @Size(max = 10)
-        private final List<FileDetail> productImages;
+        private final List<FileDetail> itemImages;
 
-        private final List<UUID> productOptionGroupIds;
+        private final List<UUID> optionGroupIds;
+
+        private final Boolean combinable;
 
         @Builder
-        public RegisterItemCommand(UUID itemCategoryId, String name, String description, int price, int onsitePrice, ItemStatus itemStatus,
+        public RegisterItemCommand(UUID itemCategoryId, String name, String description, int price, ItemStatus itemStatus,
                                    boolean brandNew, boolean recommended, boolean onsiteOrder, boolean pickupOrder,
-                                   List<FileDetail> productImages, List<UUID> productOptionGroupIds) {
+                                   List<FileDetail> itemImages, List<UUID> optionGroupIds, Boolean combinable) {
 
             validateCheckPickupOrderAndOnsiteOrder(onsiteOrder, pickupOrder);
             this.itemCategoryId = itemCategoryId;
             this.name = name;
             this.description = description;
             this.price = validateProductPrice(price);
-            this.onsitePrice = validateProductPrice(onsitePrice);
             this.itemStatus = itemStatus;
             this.brandNew = brandNew;
             this.recommended = recommended;
-            this.onsiteOrder = onsiteOrder;
-            this.pickupOrder = pickupOrder;
-            this.productImages = productImages;
-            this.productOptionGroupIds = productOptionGroupIds;
+            this.itemImages = itemImages;
+            this.optionGroupIds = optionGroupIds;
+            this.orderTypes = createOrderTypes(onsiteOrder, pickupOrder);
+            this.combinable = combinable;
             validateSelf();
         }
+    }
+
+    private static List<OrderType> createOrderTypes(boolean onsiteOrder, boolean pickupOrder) {
+        List<OrderType> orderTypes = new ArrayList<>();
+        if (onsiteOrder) {
+            orderTypes.add(OrderType.ONSITE);
+        }
+
+        if (pickupOrder) {
+            orderTypes.add(OrderType.PICKUP);
+        }
+
+        return orderTypes;
     }
 
     private static int validateProductPrice(int price) {

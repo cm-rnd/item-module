@@ -38,4 +38,15 @@ public class ItemOptionGroupRelation extends DateTimeEntity {
         this.optionGroup = optionGroup;
     }
 
+    public void setItemGroup(ItemGroup itemGroup) {
+        this.itemGroup = itemGroup;
+    }
+
+    public void setOptionGroup(OptionGroup optionGroup) {
+        this.optionGroup = optionGroup;
+    }
+
+    public ItemOptionGroupRelation(UUID uuid) {
+        this.uuid = uuid;
+    }
 }

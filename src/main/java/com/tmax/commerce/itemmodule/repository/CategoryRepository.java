@@ -13,6 +13,7 @@ import java.util.UUID;
 public interface CategoryRepository extends ExtendedRepository<Category, Long>, CategoryRepositoryCustom {
 
     List<Category> findByParentCategoryIsNull();
+  
     List<Category> findByName(String name);
 
     Boolean existsByName(String name);
@@ -24,5 +25,4 @@ public interface CategoryRepository extends ExtendedRepository<Category, Long>, 
 
     @Query("select max(c.sequence) from Category c WHERE c.shopId = :shopId")
     Optional<Integer> findMaxSequence(@Param("shopId") UUID shopId);
-
 }
