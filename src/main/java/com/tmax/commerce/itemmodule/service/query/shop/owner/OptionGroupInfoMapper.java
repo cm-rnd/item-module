@@ -19,13 +19,13 @@ public interface OptionGroupInfoMapper {
     @Mapping(target = "optionGroupId", source = "optionGroup.id")
     @Mapping(target = "options", source = "optionGroup.options")
     @Mapping(target = "choiceCount", source = "optionGroup.max")
-    OptionGroupInfo of(OptionGroup optionGroup, List<ItemGroup> items);
+    OptionGroupInfo of(OptionGroup optionGroup, List<ItemGroup> itemsGroup);
 
     @Mapping(target = "optionId", source = "option.id")
     OptionGroupInfo.OptionInfo of(Option option);
 
     @Mapping(target = "itemGroupId", source = "id")
-    OptionGroupInfo.SimpleItemInfo of(ItemGroup item);
+    OptionGroupInfo.SimpleItemInfo of(ItemGroup itemGroup);
 
     @Mapping(target = "optionGroupId", source = "optionGroup.id")
     @Mapping(target = "options", source = "optionGroup.options")
