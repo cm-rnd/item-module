@@ -13,7 +13,7 @@ public interface CategoryInfoMapper {
     CategoryInfoMapper INSTANCE = Mappers.getMapper(CategoryInfoMapper.class);
 
     @Mapping(target = "categoryId", source = "id")
-    @Mapping(target = "itemCount", expression = "java(Category.getItems().size())")
+    @Mapping(target = "itemCount", expression = "java(Category.getItems() != null ? Category.getItems().size() : 0)")
     CategoryInfo of(Category Category);
 
     @Mapping(target = "categoryId", source = "id")
