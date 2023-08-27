@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 @Getter
 @RequiredArgsConstructor
 public enum BusinessErrorCode implements ErrorCode {
-    NOT_FOUND_SHOP_CATEGORY(HttpStatus.NOT_FOUND),
+    NOT_FOUND_CATEGORY(HttpStatus.NOT_FOUND),
     NOT_FOUND_ITEM_GROUP(HttpStatus.NOT_FOUND),
     NOT_FOUND_ITEM(HttpStatus.NOT_FOUND),
     NOT_FOUND_OPTION_GROUP(HttpStatus.NOT_FOUND),
