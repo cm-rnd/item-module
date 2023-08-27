@@ -2,11 +2,11 @@ package com.tmax.commerce.itemmodule.entity.item;
 
 import com.tmax.commerce.itemmodule.entity.base.DateTimeEntity;
 import com.tmax.commerce.itemmodule.entity.category.Category;
+import com.tmax.commerce.itemmodule.entity.file.File;
 import com.tmax.commerce.itemmodule.entity.option.ItemOptionGroupRelation;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -143,8 +143,9 @@ public class ItemGroup extends DateTimeEntity {
     }
 
 
-    public void addItemOptionGroupRelation(ItemOptionGroupRelation itemoptionGroupRelation) {
-        this.itemOptionGroupRelations.add(itemoptionGroupRelation);
+    public void addItemOptionGroupRelation(ItemOptionGroupRelation itemOptionGroupRelation) {
+        this.itemOptionGroupRelations.add(itemOptionGroupRelation);
+        itemOptionGroupRelation.setItemGroup(this);
     }
 
     public void removeItemOptionGroupRelation(ItemOptionGroupRelation itemoptionGroupRelation) {
@@ -164,7 +165,8 @@ public class ItemGroup extends DateTimeEntity {
     }
 
     @Builder
-    public ItemGroup(Category category, String name) {
+    public ItemGroup(Category category, String name, UUID uuid) {
+        this.uuid = uuid;
         this.category = category;
         this.name = name;
         this.items = new ArrayList<>();
