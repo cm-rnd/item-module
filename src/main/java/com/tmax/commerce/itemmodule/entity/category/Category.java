@@ -20,6 +20,7 @@ import java.util.UUID;
 @Table(name = "Category")
 public class Category extends DateTimeEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
 
