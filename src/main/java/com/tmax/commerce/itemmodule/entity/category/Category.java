@@ -10,6 +10,7 @@ import java.util.UUID;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 @Entity
@@ -21,15 +22,19 @@ import java.util.List;
 @Builder
 public class Category extends DateTimeEntity {
     @Id
-    @EqualsAndHashCode.Include
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", nullable = false)
     private Long id;
 
     @Column(columnDefinition = "BINARY(16)")
     private UUID uuid;
 
+    private UUID shopId;
+
     @Column(nullable = false)
     private String name;
+
+    private String description;
 
     @Enumerated(EnumType.STRING)
     private CategoryColor categoryColor;
@@ -37,11 +42,13 @@ public class Category extends DateTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private Category parentCategory;
 
+    private int sequence;
+
     @OneToMany(mappedBy = "parentCategory", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @Builder.Default
     private List<Category> subCategories = new ArrayList<>();
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
     private List<ItemGroup> items;
 
 //    @OneToMany(mappedBy = "category")
@@ -70,4 +77,8 @@ public class Category extends DateTimeEntity {
             this.name = name;
         }
     }
+
+    public void updateDescription(String description){ this.description = description; }
+
+    public void updateSequence(int sequence) { this.sequence = sequence; }
 }

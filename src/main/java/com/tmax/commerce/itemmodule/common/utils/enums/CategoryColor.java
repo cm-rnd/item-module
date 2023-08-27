@@ -16,7 +16,8 @@ public enum CategoryColor {
     GRAY("#8B8B8B"),
     MINT("#28DCB9"),
     WHITE("#FFFFFF"),
-    ORANGE("#FA7002");
+    ORANGE("#FA7002"),
+    NONE("NONE");
 
     private final String colorCode;
 
