@@ -4,11 +4,10 @@ import com.tmax.commerce.itemmodule.entity.item.ItemStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Getter
-@AllArgsConstructor
 public class OptionGroupInfo {
     private final Long optionGroupId;
     private final String name;
@@ -16,6 +15,16 @@ public class OptionGroupInfo {
     private final int choiceCount;
     private final List<OptionInfo> options;
     private final List<SimpleItemInfo> items;
+
+    public OptionGroupInfo(Long optionGroupId, String name, Boolean required, int choiceCount,
+                           List<OptionInfo> options, List<SimpleItemInfo> items) {
+        this.optionGroupId = optionGroupId;
+        this.name = name;
+        this.required = required;
+        this.choiceCount = choiceCount;
+        this.options = options != null ? options : new ArrayList<>();
+        this.items = items != null ? items : new ArrayList<>();
+    }
 
     @Getter
     @AllArgsConstructor
