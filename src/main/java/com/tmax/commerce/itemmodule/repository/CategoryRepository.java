@@ -18,7 +18,7 @@ public interface CategoryRepository extends ExtendedRepository<Category, Long>, 
     Boolean existsByName(String name);
 
     @Query("SELECT CASE WHEN COUNT(c) > 0 THEN true ELSE false END FROM Category c WHERE c.shopId = :shopId AND c.name = :name")
-    boolean existsByShopAndName(UUID shopId, String name);
+    boolean existsByShopAndName(@Param("shopId") UUID shopId, @Param("name") String name);
 
     Slice<Category> findByShopId(UUID shopId, Pageable pageable);
 
