@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
-import java.util.UUID;
 
 public interface ItemOptionGroupRelationRepository extends ExtendedRepository<ItemOptionGroupRelation, Long> {
 
@@ -22,4 +21,7 @@ public interface ItemOptionGroupRelationRepository extends ExtendedRepository<It
 
     @EntityGraph(attributePaths = {"itemGroup"})
     List<ItemOptionGroupRelation> findAllByItemGroupId(Long itemGroupId);
+
+    @EntityGraph(attributePaths = {"optionGroup"})
+    List<ItemOptionGroupRelation> findByItemGroupId(Long itemGroupId);
 }

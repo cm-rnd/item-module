@@ -60,7 +60,3 @@ dependencyManagement {
         mavenBom "io.sentry:sentry-bom:${sentryVersion}"
     }
 }
-
-tasks.named('test') {
-    useJUnitPlatform()
-}
