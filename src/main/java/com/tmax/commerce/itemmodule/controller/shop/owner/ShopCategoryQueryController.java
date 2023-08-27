@@ -1,8 +1,8 @@
 package com.tmax.commerce.itemmodule.controller.shop.owner;
 
 import com.tmax.commerce.itemmodule.common.CommonResponse;
-import com.tmax.commerce.itemmodule.service.query.shop.owner.CategoryQuery;
-import com.tmax.commerce.itemmodule.service.query.shop.owner.CategoryQueryService;
+import com.tmax.commerce.itemmodule.service.query.shop.owner.ShopCategoryQuery;
+import com.tmax.commerce.itemmodule.service.query.shop.owner.ShopCategoryQueryService;
 import com.tmax.commerce.itemmodule.service.query.shop.owner.info.CategoryInfo;
 import com.tmax.commerce.itemmodule.service.query.shop.owner.info.CategoryItemInfo;
 import io.swagger.v3.oas.annotations.Operation;
@@ -29,8 +29,8 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @RequestMapping("cm-owner/api/v1")
 @Tag(name = "cm-owner-categories")
-public class CategoryQueryController {
-    private final CategoryQueryService categoryQueryService;
+public class ShopCategoryQueryController {
+    private final ShopCategoryQueryService categoryQueryService;
 
     @Operation(
             summary = "상품 카테고리 다건 조회(스크롤 방식)",
@@ -53,8 +53,8 @@ public class CategoryQueryController {
         @NotNull
         private UUID shopId;
 
-        public CategoryQuery.RetrieveCategoriesQuery toQuery(Pageable pageable) {
-            return CategoryQuery.RetrieveCategoriesQuery.builder()
+        public ShopCategoryQuery.RetrieveCategoriesQuery toQuery(Pageable pageable) {
+            return ShopCategoryQuery.RetrieveCategoriesQuery.builder()
                     .shopId(shopId)
                     .pageable(pageable)
                     .build();

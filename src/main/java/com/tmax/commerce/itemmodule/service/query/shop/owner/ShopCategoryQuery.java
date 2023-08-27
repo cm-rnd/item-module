@@ -9,7 +9,7 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.UUID;
 
-public class CategoryQuery {
+public class ShopCategoryQuery {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class RetrieveCategoriesQuery extends SelfValidating<RetrieveCategoriesQuery> {

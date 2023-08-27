@@ -1,8 +1,8 @@
 package com.tmax.commerce.itemmodule.controller.shop.owner;
 
 import com.tmax.commerce.itemmodule.common.CommonResponse;
-import com.tmax.commerce.itemmodule.service.command.shop.owner.CategoryCommand;
-import com.tmax.commerce.itemmodule.service.command.shop.owner.CategoryCommandService;
+import com.tmax.commerce.itemmodule.service.command.shop.owner.ShopCategoryCommand;
+import com.tmax.commerce.itemmodule.service.command.shop.owner.ShopCategoryCommandService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.headers.Header;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -27,9 +27,9 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @RequestMapping("cm-owner/api/v1")
 @Tag(name = "cm-owner-categories")
-public class CategoryCommandController {
+public class ShopCategoryCommandController {
 
-    private final CategoryCommandService categoryCommandService;
+    private final ShopCategoryCommandService shopCategoryCommandService;
 
     @Operation(
             summary = "샵 상품 카테고리 생성",
@@ -48,9 +48,9 @@ public class CategoryCommandController {
     })
     @PostMapping(value = "/categories")
     ResponseEntity<Void> registerShopCategory(@RequestBody RegisterCategoryRequest registerCategoryRequest) {
-        CategoryCommand.RegisterCategoryCommand command = registerCategoryRequest.toCommand();
+        ShopCategoryCommand.RegisterCategoryCommand command = registerCategoryRequest.toCommand();
 
-        Long CategoryId = categoryCommandService.registerShopCategory(command);
+        Long CategoryId = shopCategoryCommandService.registerShopCategory(command);
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -71,8 +71,8 @@ public class CategoryCommandController {
         private String name;
         private String description;
 
-        public CategoryCommand.RegisterCategoryCommand toCommand() {
-            return CategoryCommand.RegisterCategoryCommand.builder()
+        public ShopCategoryCommand.RegisterCategoryCommand toCommand() {
+            return ShopCategoryCommand.RegisterCategoryCommand.builder()
                     .shopId(shopId)
                     .name(name)
                     .description(description)
@@ -90,10 +90,10 @@ public class CategoryCommandController {
     })
     @DeleteMapping(value = "/categories/{categoryId}")
     ResponseEntity<Void> deleteShopCategory(@PathVariable Long categoryId) {
-        CategoryCommand.DeleteCategoryCommand command = CategoryCommand.DeleteCategoryCommand.builder()
+        ShopCategoryCommand.DeleteCategoryCommand command = ShopCategoryCommand.DeleteCategoryCommand.builder()
                 .categoryId(categoryId)
                 .build();
-        categoryCommandService.deleteShopCategory(command);
+        shopCategoryCommandService.deleteShopCategory(command);
         return ResponseEntity.noContent().build();
     }
 
@@ -107,8 +107,8 @@ public class CategoryCommandController {
     })
     @PatchMapping(value = "/categories/{categoryId}")
     ResponseEntity<Void> updateShopCategory(@PathVariable Long categoryId, @RequestBody UpdateCategoryRequest updateCategoryRequest) {
-        CategoryCommand.UpdateCategoryCommand command = updateCategoryRequest.toCommand(categoryId);
-        categoryCommandService.updateShopCategory(command);
+        ShopCategoryCommand.UpdateCategoryCommand command = updateCategoryRequest.toCommand(categoryId);
+        shopCategoryCommandService.updateShopCategory(command);
         return ResponseEntity.noContent().build();
     }
 
@@ -119,8 +119,8 @@ public class CategoryCommandController {
         private String name;
         private String description;
 
-        public CategoryCommand.UpdateCategoryCommand toCommand(Long categoryId) {
-            return CategoryCommand.UpdateCategoryCommand.builder()
+        public ShopCategoryCommand.UpdateCategoryCommand toCommand(Long categoryId) {
+            return ShopCategoryCommand.UpdateCategoryCommand.builder()
                     .categoryId(categoryId)
                     .name(name)
                     .description(description)
@@ -138,8 +138,8 @@ public class CategoryCommandController {
     })
     @PutMapping(value = "/categories/sequence")
     ResponseEntity<Void> updateShopCategorySequences(@RequestBody UpdateCategorySequenceRequests updateCategorySequenceRequests) {
-        CategoryCommand.UpdateCategorySequencesCommand command = updateCategorySequenceRequests.toCommand();
-        categoryCommandService.updateShopCategorySequence(command);
+        ShopCategoryCommand.UpdateCategorySequencesCommand command = updateCategorySequenceRequests.toCommand();
+        shopCategoryCommandService.updateShopCategorySequence(command);
         return ResponseEntity.noContent().build();
     }
 
@@ -148,8 +148,8 @@ public class CategoryCommandController {
     public static class UpdateCategorySequenceRequests {
         private List<UpdateCategorySequenceRequest> updateCategorySequences;
 
-        public CategoryCommand.UpdateCategorySequencesCommand toCommand() {
-            return CategoryCommand.UpdateCategorySequencesCommand.builder()
+        public ShopCategoryCommand.UpdateCategorySequencesCommand toCommand() {
+            return ShopCategoryCommand.UpdateCategorySequencesCommand.builder()
                     .updateCategorySequenceCommands(updateCategorySequences.stream()
                             .map(UpdateCategorySequenceRequest::toCommand)
                             .collect(Collectors.toList()))
@@ -162,8 +162,8 @@ public class CategoryCommandController {
             private Long categoryId;
             private int sequence;
 
-            public CategoryCommand.UpdateCategorySequencesCommand.UpdateCategorySequenceCommand toCommand() {
-                return CategoryCommand.UpdateCategorySequencesCommand.UpdateCategorySequenceCommand.builder()
+            public ShopCategoryCommand.UpdateCategorySequencesCommand.UpdateCategorySequenceCommand toCommand() {
+                return ShopCategoryCommand.UpdateCategorySequencesCommand.UpdateCategorySequenceCommand.builder()
                         .categoryId(categoryId)
                         .sequence(sequence)
                         .build();

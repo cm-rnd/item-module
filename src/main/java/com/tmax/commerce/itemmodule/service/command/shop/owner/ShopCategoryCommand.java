@@ -9,7 +9,7 @@ import lombok.Getter;
 import java.util.List;
 import java.util.UUID;
 
-public class CategoryCommand {
+public class ShopCategoryCommand {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)

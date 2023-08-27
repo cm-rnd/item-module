@@ -11,17 +11,17 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class CategoryQueryService {
+public class ShopCategoryQueryService {
 
     private final CategoryRepository categoryRepository;
 
-    public Slice<CategoryInfo> retrieveShopCategories(CategoryQuery.RetrieveCategoriesQuery retrieveCategoriesQuery) {
+    public Slice<CategoryInfo> retrieveShopCategories(ShopCategoryQuery.RetrieveCategoriesQuery retrieveCategoriesQuery) {
         return categoryRepository
                 .findByShopId(retrieveCategoriesQuery.getShopId(), retrieveCategoriesQuery.getPageable())
                 .map(CategoryInfoMapper.INSTANCE::of);
     }
 
-    public Slice<CategoryItemInfo> retrieveShopCategoryAndItem(CategoryQuery.RetrieveCategoriesQuery retrieveCategoriesQuery) {
+    public Slice<CategoryItemInfo> retrieveShopCategoryAndItem(ShopCategoryQuery.RetrieveCategoriesQuery retrieveCategoriesQuery) {
         return categoryRepository.findByShopId(retrieveCategoriesQuery.getShopId(), retrieveCategoriesQuery.getPageable())
                 .map(CategoryInfoMapper.INSTANCE::itemOf);
     }

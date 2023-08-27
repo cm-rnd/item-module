@@ -17,11 +17,11 @@ import java.util.UUID;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class CategoryCommandService {
+public class ShopCategoryCommandService {
     private final CategoryRepository categoryRepository;
     private final ShopValidateService shopValidateService; // 임의 구현
 
-    public Long registerShopCategory(CategoryCommand.RegisterCategoryCommand registerCategoryCommand) {
+    public Long registerShopCategory(ShopCategoryCommand.RegisterCategoryCommand registerCategoryCommand) {
         // shopValidateService.isShopIdValid(shopId); TODO: shop 유효성 검증 필요
         validateUniqueShopCategoryName(registerCategoryCommand.getShopId(), registerCategoryCommand.getName());
         Integer maxSequence = categoryRepository.findMaxSequence(registerCategoryCommand.getShopId()).orElse(0);
@@ -45,12 +45,12 @@ public class CategoryCommandService {
         }
     }
 
-    public void deleteShopCategory(CategoryCommand.DeleteCategoryCommand deleteCategoryCommand) {
+    public void deleteShopCategory(ShopCategoryCommand.DeleteCategoryCommand deleteCategoryCommand) {
         Category category = categoryRepository.findByIdOrElseThrow(deleteCategoryCommand.getCategoryId());
         categoryRepository.delete(category);
     }
 
-    public void updateShopCategory(CategoryCommand.UpdateCategoryCommand updateCategoryCommand) {
+    public void updateShopCategory(ShopCategoryCommand.UpdateCategoryCommand updateCategoryCommand) {
         Category category = categoryRepository.findByIdOrElseThrow(updateCategoryCommand.getCategoryId());
         UUID shopId = category.getShopId();
 
@@ -62,7 +62,7 @@ public class CategoryCommandService {
         category.updateDescription(updateCategoryCommand.getDescription());
     }
 
-    public void updateShopCategorySequence(CategoryCommand.UpdateCategorySequencesCommand updateCategorySequencesCommand) {
+    public void updateShopCategorySequence(ShopCategoryCommand.UpdateCategorySequencesCommand updateCategorySequencesCommand) {
         updateCategorySequencesCommand
                 .getUpdateCategorySequenceCommands()
                 .forEach(updateCategorySequenceCommand -> {
